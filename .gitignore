@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+
+# perfetto trace 是二进制大文件，默认不提交（需要时用 git-lfs 或只留小样本）
+traces/*.perfetto-trace
+traces/*.pb
+traces/*.pftrace
+
+# experiments 里的构建产物（保留源码与日志，产物可重建）
+experiments/**/build/
+experiments/**/out/

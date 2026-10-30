@@ -7,6 +7,7 @@
 | **第二轮** | [ServiceStarter-annotated.md](./ServiceStarter-annotated.md) | binder 的出生和第一次投递 | 20 min |
 | **第三轮** | [ShizukuService-annotated.md](./ShizukuService-annotated.md) | server 启动与 binder 批量分发 | 20 min |
 | **第四轮** | [BinderSender-annotated.md](./BinderSender-annotated.md) | 「时机探测器」——App 一启动 binder 自动到 | 15 min |
+| **图** | [shizuku-architecture.html](./shizuku-architecture.html) | 时序图 + UserService 递归图（抽象概念的图形版） | 10 min |
 
 > 第一轮（架构图概览）已在 stepper 文档里完成，不需要再看文件。
 > 对照源码：`~/projects/Shizuku-shallow/` 下的对应 .java 文件。

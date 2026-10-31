@@ -1,0 +1,24 @@
+diff --git a/server/src/main/java/rikka/shizuku/server/ShizukuService.java b/server/src/main/java/rikka/shizuku/server/ShizukuService.java
+index ed90d22..e5baf14 100644
+--- a/server/src/main/java/rikka/shizuku/server/ShizukuService.java
++++ b/server/src/main/java/rikka/shizuku/server/ShizukuService.java
+@@ -95,6 +95,7 @@ public class ShizukuService extends Service<ShizukuUserServiceManager, ShizukuCl
+         HandlerUtil.setMainHandler(mainHandler);
+ 
+         LOGGER.i("starting server...");
++        LOGGER.i("W1D5-MODIFIED-MARKER: server constructor reached (huangankun)");
+ 
+         waitSystemService("package");
+         waitSystemService(Context.ACTIVITY_SERVICE);
+diff --git a/starter/src/main/java/moe/shizuku/starter/ServiceStarter.java b/starter/src/main/java/moe/shizuku/starter/ServiceStarter.java
+index f788ff6..62f5bd4 100644
+--- a/starter/src/main/java/moe/shizuku/starter/ServiceStarter.java
++++ b/starter/src/main/java/moe/shizuku/starter/ServiceStarter.java
+@@ -59,6 +59,7 @@ public class ServiceStarter {
+     }
+ 
+     public static void main(String[] args) {
++        Log.i(TAG, "W1D5-MODIFIED-MARKER: ServiceStarter.main() entered");
+         if (Looper.getMainLooper() == null) {
+             Looper.prepareMainLooper();
+         }

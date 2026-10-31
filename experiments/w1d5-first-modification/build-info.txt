@@ -1,0 +1,7 @@
+W1D5 构建信息
+日期: 2026-10-31 21:21:04
+JDK: openjdk version "21.0.13" 2026-10-20 LTS
+NDK: 29.0.13113456
+Gradle: 8.14
+APK: manager/build/outputs/apk/debug/shizuku-v13.6.0.r1.b844bc4-debug.apk
+APK sha256: 32211378d8582c99930363cb48acacd761550b47ee3bb45118ace8ec67274010

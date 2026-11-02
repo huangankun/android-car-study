@@ -52,14 +52,14 @@
 - [x] **W1D3** Shizuku 导读（starter → service → BinderSender 架构图 + 源码逐行注释）
 - [x] **W1D4** 深读与问题清单（attachApplication / observer / 去重 / UserService vs CarService）
 - [x] **W1D5** 第一次改代码（加标记日志 → 构建 → logcat 验证，证据在 `experiments/`）
-- [~] **W1D6** 发布第一篇《Shizuku 源码解读》（v1 已定稿，待发布掘金）
+- [x] **W1D6** 文章底稿定稿《Shizuku 源码解读》（掘金暂缓，发布并入多平台分发待办）
 - [ ] W1D7 周复盘 + 后续任务（W2 AAOS 黄金链路…）
 
 ## 文章索引
 
 | # | 标题 | 状态 |
 |---|---|---|
-| 01 | [Shizuku 源码解读：不用 Root，如何让 App 调用系统级 API？](./articles/01-shizuku源码解读.md) | v1 定稿，待发布 |
+| 01 | [Shizuku 源码解读：不用 Root，如何让 App 调用系统级 API？](./articles/01-shizuku源码解读.md) | v1 定稿（底稿） |
 
 ## 环境要求
 
@@ -72,6 +72,7 @@
 - 2026-10-30：W1D1-W1D2（环境 + dumpsys 十连）
 - 2026-10-31：W1D3-W1D4（Shizuku 导读 + 深读）+ W1D5 环境搭建（NDK/Java 21）
 - 2026-11-01：W1D5 首次改代码验证通过 + W1D6 文章 v1
+- 2026-11-02：W1D6 文章底稿定稿；掘金暂缓，发布并入「多平台分发」待办
 
 ## License
 

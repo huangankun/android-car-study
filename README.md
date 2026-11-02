@@ -28,29 +28,50 @@
 
 ```
 .
-├── notes/          # 每个任务的 stepper 文档（任务卡 / 执行步骤 / 问题日志 / 自测）
-│   └── dumpsys/    # 10 条系统服务 dump：逐段讲解 + 完整原始输出
-├── articles/       # 每篇解读文章（问题 → 机制 → 验证）
-├── experiments/    # 代码修改补丁、logcat 日志、截图
-└── traces/         # perfetto trace 文件
+├── articles/                    # 解读文章（问题 → 机制 → 验证）
+│   └── 01-shizuku源码解读.md
+├── notes/                       # 每个任务的 stepper 文档（任务卡 / 步骤 / 问题日志 / 自测）
+│   ├── w1d1-环境搭建-stepper.md
+│   ├── w1d2-dumpsys十连-stepper.md
+│   ├── w1d3-shizuku导读-stepper.md
+│   ├── w1d4-深读与问题清单-stepper.md
+│   ├── w1d5-第一次改代码-stepper.md
+│   ├── dumpsys/                 # 10 条系统服务 dump：逐段讲解 + 完整原始输出
+│   └── w1d3/                    # Shizuku 源码逐行注释 + 架构时序图（HTML）
+├── experiments/                 # 代码修改 patch / logcat 证据 / 截图
+│   └── w1d5-first-modification/ # 第一次改代码：patch + logcat + 构建信息
+├── traces/                      # perfetto trace（W3 预留）
+├── README.md
+└── LICENSE
 ```
 
-## 当前进度
+## 当前进度（5/28）
 
-- [x] W1D1 环境搭建（cmdline-tools + arm64 模拟器镜像 + AVD boot）
-- [x] W1D2 dumpsys 十连（10 条系统服务 dump，含逐段讲解）
-- [ ] W1D3 Shizuku 导读（starter → service → BinderSender）
-- [ ] 后续任务（共 28 个，随进度更新）
+- [x] **W1D1** 环境搭建（cmdline-tools + arm64 模拟器 + AVD boot）
+- [x] **W1D2** dumpsys 十连（10 条系统服务 dump，含逐段讲解）
+- [x] **W1D3** Shizuku 导读（starter → service → BinderSender 架构图 + 源码逐行注释）
+- [x] **W1D4** 深读与问题清单（attachApplication / observer / 去重 / UserService vs CarService）
+- [x] **W1D5** 第一次改代码（加标记日志 → 构建 → logcat 验证，证据在 `experiments/`）
+- [ ] **W1D6** 发布第一篇《Shizuku 源码解读》（v1 已就绪，待发布掘金）
+- [ ] W1D7 周复盘 + 后续任务（W2 AAOS 黄金链路…）
+
+## 文章索引
+
+| # | 标题 | 状态 |
+|---|---|---|
+| 01 | [Shizuku 源码解读：不用 Root，如何让 App 调用系统级 API？](./articles/01-shizuku源码解读.md) | v1 待发布 |
 
 ## 环境要求
 
 - macOS（Apple Silicon）+ Android SDK（cmdline-tools / platform-tools / emulator）
 - Android 14（API 34）`google_apis;arm64-v8a` 模拟器镜像
-- `adb` / `sdkmanager` / `emulator` 已加入 PATH
+- 构建 Shizuku 额外需要：**NDK 29** + **JDK 21**（JDK 17 会报「无效的源发行版：21」）
 
-## 文章索引
+## 更新记录
 
-文章发布后在此登记（掘金 + 本仓库 `articles/` 同步）。
+- 2026-10-30：W1D1-W1D2（环境 + dumpsys 十连）
+- 2026-10-31：W1D3-W1D4（Shizuku 导读 + 深读）+ W1D5 环境搭建（NDK/Java 21）
+- 2026-11-01：W1D5 首次改代码验证通过 + W1D6 文章 v1
 
 ## License
 

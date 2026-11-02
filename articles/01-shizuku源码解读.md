@@ -3,6 +3,8 @@
 > 系列：座舱 Android 系统服务学习笔记 01
 > 关键词：Android / 系统服务 / Binder / ContentProvider / Shizuku
 
+> 阅读前提：本文假设你了解 binder/AIDL 的基本概念（知道 `IBinder`、`BinderProxy`、AIDL 是什么）。不熟也没关系——2.2 节会边讲边补。
+
 ## 一、问题：普通 App 为什么调不了系统 API
 
 做 Android 开发都知道，调系统能力是走 `Manager` 的。比如拿已安装应用列表：
@@ -39,22 +41,21 @@ Shizuku 的答案是：**把 shell 的权限「借」给 App**——用一个独
 
 ### 2.1 整体架构
 
-```
-adb shell start.sh
-   │  (shell 权限, uid 2000)
-   ▼
-ServiceStarter            ← W1D3 精读：binder 的出生地
-   │  创建 ShizukuService binder
-   │  ContentProvider.call("sendUserService")
-   ▼
-Manager App               ← 拿到 binder
-   │
-   │  BinderSender 监控进程启动
-   ▼
-ShizukuService (server)   ← 特权服务本体
-   │  ContentProvider.call("sendBinder")
-   ▼
-普通 App (uid 10xxx)      ← 拿到 binder → transactRemote()
+```mermaid
+sequenceDiagram
+    participant S as ServiceStarter<br/>(shell, uid 2000)
+    participant M as Manager App
+    participant SS as ShizukuService
+    participant A as 普通 App<br/>(uid 10xxx)
+
+    S->>M: ① call('sendUserService', BinderContainer)
+    Note over M: 拿到 ShizukuService binder
+
+    SS->>A: ② call('sendBinder', BinderContainer)
+    A->>SS: ③ attachApplication（报到 + 安全校验）
+    SS-->>A: 回复 serverUid / version / seccontext
+
+    Note over A: App 现在能 transactRemote() 了
 ```
 
 关键角色只有三个：**starter（拿到 shell 权限）、server（持有特权 binder）、provider（投递 binder 的通道）**。
@@ -192,6 +193,7 @@ Shizuku 的构建不是 `./gradlew assembleDebug` 就完事的，实测踩了三
 | NDK 版本 | `LicenceNotAcceptedException: ndk;29.0.13113456` | `sdkmanager --licenses` + 装 NDK 29 |
 | Java 版本 | `无效的源发行版：21` | 装 JDK 21（根 `build.gradle` 设了 `sourceCompatibility = VERSION_21`） |
 | brew 装 JDK 21 | ghcr.io 下载 `HTTP/2 PROTOCOL_ERROR`，卡在固定字节 | 别用 brew，直接从清华 Adoptium 镜像下 Temurin |
+| start.sh 未生成 | `/sdcard/Android/data/moe.shizuku.privileged.api/start.sh` 不存在 | 绕过 app UI，直接 `app_process` 手动拉 server |
 
 最后一个坑值得单独说：`brew install openjdk@21` 在国内会因为 ghcr.io 不稳而卡死，`HOMEBREW_BOTTLE_DOMAIN` 对它也不生效。**直接从镜像下 Temurin JDK（单文件、190MB、59MB/s）才是正解。**
 

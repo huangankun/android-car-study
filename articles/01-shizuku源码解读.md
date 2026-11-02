@@ -184,9 +184,9 @@ Log.i(TAG, "W1D5-MODIFIED-MARKER: ServiceStarter.main() entered");
 LOGGER.i("W1D5-MODIFIED-MARKER: server constructor reached");
 ```
 
-### 3.2 构建（这里踩了 3 个坑）
+### 3.2 构建（这里踩了 4 个坑）
 
-Shizuku 的构建不是 `./gradlew assembleDebug` 就完事的，实测踩了三个坑：
+Shizuku 的构建不是 `./gradlew assembleDebug` 就完事的，实测踩了四个坑：
 
 | 坑 | 现象 | 解法 |
 |---|---|---|
@@ -195,7 +195,7 @@ Shizuku 的构建不是 `./gradlew assembleDebug` 就完事的，实测踩了三
 | brew 装 JDK 21 | ghcr.io 下载 `HTTP/2 PROTOCOL_ERROR`，卡在固定字节 | 别用 brew，直接从清华 Adoptium 镜像下 Temurin |
 | start.sh 未生成 | `/sdcard/Android/data/moe.shizuku.privileged.api/start.sh` 不存在 | 绕过 app UI，直接 `app_process` 手动拉 server |
 
-最后一个坑值得单独说：`brew install openjdk@21` 在国内会因为 ghcr.io 不稳而卡死，`HOMEBREW_BOTTLE_DOMAIN` 对它也不生效。**直接从镜像下 Temurin JDK（单文件、190MB、59MB/s）才是正解。**
+其中 brew 那个坑值得单独说：`brew install openjdk@21` 在国内会因为 ghcr.io 不稳而卡死，`HOMEBREW_BOTTLE_DOMAIN` 对它也不生效。**直接从镜像下 Temurin JDK（单文件、190MB、59MB/s）才是正解。**
 
 ### 3.3 logcat 证据
 

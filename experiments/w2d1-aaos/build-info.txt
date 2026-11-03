@@ -1,0 +1,6 @@
+AAOS W2D1 环境
+日期: 2026-11-03 10:07:40
+AVD: aaos (Android 13, android-automotive,google_apis, arm64-v8a)
+系统: sdk_gcar_arm64 / userdebug
+镜像: system-images/android-33/android-automotive,google_apis/arm64-v8a (软链 android-automotive-google_apis)
+boot: 23663 ms

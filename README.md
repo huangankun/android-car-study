@@ -39,13 +39,14 @@
 │   ├── dumpsys/                 # 10 条系统服务 dump：逐段讲解 + 完整原始输出
 │   └── w1d3/                    # Shizuku 源码逐行注释 + 架构时序图（HTML）
 ├── experiments/                 # 代码修改 patch / logcat 证据 / 截图
-│   └── w1d5-first-modification/ # 第一次改代码：patch + logcat + 构建信息
+│   ├── w1d5-first-modification/ # 第一次改代码：patch + logcat + 构建信息
+│   └── w2d1-aaos/               # AAOS 镜像：dumpsys car_service + 服务清单 + 构建信息
 ├── traces/                      # perfetto trace（W3 预留）
 ├── README.md
 └── LICENSE
 ```
 
-## 当前进度（7/28，W1 完成）
+## 当前进度（8/28）
 
 - [x] **W1D1** 环境搭建（cmdline-tools + arm64 模拟器 + AVD boot）
 - [x] **W1D2** dumpsys 十连（10 条系统服务 dump，含逐段讲解）
@@ -54,7 +55,8 @@
 - [x] **W1D5** 第一次改代码（加标记日志 → 构建 → logcat 验证，证据在 `experiments/`）
 - [x] **W1D6** 文章底稿定稿《Shizuku 源码解读》（掘金暂缓，发布并入多平台分发待办）
 - [x] **W1D7** 周复盘（[`notes/w1d7-周复盘.md`](./notes/w1d7-周复盘.md)）
-- [ ] **W2** AAOS 黄金链路：Vehicle HAL → CarService → CarPropertyManager → App（下一周）
+- [x] **W2D1** AAOS 镜像试跑（Android 13 automotive arm64 启动成功，`dumpsys car_service` 1733 行）
+- [ ] **W2** AAOS 黄金链路：Vehicle HAL → CarService → CarPropertyManager → App（进行中）
 
 ## 文章索引
 
@@ -74,6 +76,7 @@
 - 2026-10-31：W1D3-W1D4（Shizuku 导读 + 深读）+ W1D5 环境搭建（NDK/Java 21）
 - 2026-11-01：W1D5 首次改代码验证通过 + W1D6 文章 v1
 - 2026-11-02：W1D6 文章底稿定稿；W1D7 周复盘 → **W1 完成（7/28）**；掘金暂缓，发布并入「多平台分发」待办
+- 2026-11-03：W2D1 AAOS 镜像试跑成功（复合 tag + QEMU 逗号坑已解，`dumpsys car_service` 1733 行）
 
 ## License
 

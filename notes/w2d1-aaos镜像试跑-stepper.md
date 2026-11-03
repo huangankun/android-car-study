@@ -2,7 +2,7 @@
 
 > 任务：在 Mac 上跑起 Android Automotive（AAOS）车端镜像，进系统 + `dumpsys car_service` 有输出。这是 W2 黄金链路的「跑车底座」。
 > 执行人：Hermes（导师）｜学习者：先生
-> 最终状态：✅ AAOS 启动成功（boot 23.6s，`emulator-5554`，Android 13 / userdebug / `sdk_gcar_arm64`），`dumpsys car_service` 输出 1733 行。
+> 最终状态：✅ AAOS 启动成功（boot 23.6s，`emulator-5554`，Android 13 / userdebug / `sdk_gcar_arm64`），`dumpsys car_service` 输出 1733 行。设备 profile：`automotive_1024p_landscape`（1024×768 横屏）。主屏右侧「No maps application installed」是镜像自带的地图占位页（非 bug），截图见 `experiments/w2d1-aaos/screenshot-launcher.png`。
 > 证据：`experiments/w2d1-aaos/`（dumpsys 存档 + 服务清单 + 构建信息）
 
 ## 任务卡
@@ -43,7 +43,7 @@ unzip -q aaos.zip -d ~/Library/Android/sdk/system-images/android-33/android-auto
 ```bash
 # 目录名必须匹配复合 tag
 mv android-automotive "android-automotive,google_apis"
-avdmanager create avd -n aaos -k "system-images;android-33;android-automotive,google_apis;arm64-v8a" --device pixel_6 --force
+avdmanager create avd -n aaos -k "system-images;android-33;android-automotive,google_apis;arm64-v8a" --device automotive_1024p_landscape --force
 ```
 
 ### S4 · 绕过逗号截断（本课核心 trick）✅
@@ -90,8 +90,9 @@ Car Version: CarVersion[name=Car.CAR_VERSION, major=33, minor=3]
 | P1 | `avdmanager` 报 `Package path is not valid`，提示 `android-automotive,google_apis` | AAOS 镜像的 TagId 是**复合 tag**（Automotive + Google APIs 合成一个），不是单纯 `android-automotive` | 目录名改 `android-automotive,google_apis`，`-k` 用完整复合路径 |
 | P2 | 启动崩：`Could not open '.../android-automotive': No such file` | QEMU `-drive` 用逗号分隔选项，目录名里的逗号把路径截断 | 建无逗号软链 `android-automotive-google_apis`，改 `config.ini` 的 `image.sysdir.1` 指向它 |
 | P3 | 腾讯镜像下载 0 字节卡死（HTTP 200 假成功） | 腾讯镜像对个别 sys-img 文件服务异常 | 换 Google 直连（实测 13.4MB/s） |
+| P4 | 界面元素重叠/挤在一起（CarLauncher 主屏错乱） | 建 AVD 时用了 `--device pixel_6`（手机 1080×2400 **竖屏**），AAOS 的 CarLauncher 要横屏车机 profile | 改用 `--device automotive_1024p_landscape`（1024×768 横屏），删 AVD 重建 |
 
-**P1/P2/P3 已沉淀进 `android-car-mentor` 技能「已知坑速查」。**
+**P1/P2/P3/P4 已沉淀进 `android-car-mentor` 技能「已知坑速查」。**
 
 ## 面试高频命令
 

@@ -3,6 +3,7 @@
 > 任务：在 Mac 上跑起 Android Automotive（AAOS）车端镜像，进系统 + `dumpsys car_service` 有输出。这是 W2 黄金链路的「跑车底座」。
 > 执行人：Hermes（导师）｜学习者：先生
 > 最终状态：✅ AAOS 启动成功（boot 23.6s，`emulator-5554`，Android 13 / userdebug / `sdk_gcar_arm64`），`dumpsys car_service` 输出 1733 行。设备 profile：`automotive_1024p_landscape`（1024×768 横屏）。主屏右侧「No maps application installed」是镜像自带的地图占位页（非 bug），截图见 `experiments/w2d1-aaos/screenshot-launcher.png`。
+> 配套文档：**车服务地图** → [`notes/w2d1-car-service-map.md`](./w2d1-car-service-map.md)（33 个子服务 + 9 个 HAL 的分组说明 + 排障索引）
 > 证据：`experiments/w2d1-aaos/`（dumpsys 存档 + 服务清单 + 构建信息）
 
 ## 任务卡

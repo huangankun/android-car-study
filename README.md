@@ -55,7 +55,7 @@
 - [x] **W1D5** 第一次改代码（加标记日志 → 构建 → logcat 验证，证据在 `experiments/`）
 - [x] **W1D6** 文章底稿定稿《Shizuku 源码解读》（掘金暂缓，发布并入多平台分发待办）
 - [x] **W1D7** 周复盘（[`notes/w1d7-周复盘.md`](./notes/w1d7-周复盘.md)）
-- [x] **W2D1** AAOS 镜像试跑（Android 13 automotive arm64 启动成功，`dumpsys car_service` 1733 行）
+- [x] **W2D1** AAOS 镜像试跑（Android 13 automotive arm64 启动成功，`dumpsys car_service` 1733 行）｜[车服务地图](./notes/w2d1-car-service-map.md)
 - [ ] **W2** AAOS 黄金链路：Vehicle HAL → CarService → CarPropertyManager → App（进行中）
 
 ## 文章索引

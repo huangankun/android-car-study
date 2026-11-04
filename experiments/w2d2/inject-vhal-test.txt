@@ -1,0 +1,2 @@
+注入 GEAR_SELECTION=8 后读回：
+Property:0x11400400, status: 0, timestamp: 1375801667, zone: 0x0, floatValues: [], int32Values: [4], int64Values: [], bytes: [], string: 

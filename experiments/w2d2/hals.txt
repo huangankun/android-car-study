@@ -1,0 +1,9 @@
+com.android.car.hal.PowerHalService
+com.android.car.hal.InputHalService
+com.android.car.hal.DiagnosticHalService
+com.android.car.hal.VmsHalService
+com.android.car.hal.UserHalService
+com.android.car.hal.ClusterHalService
+com.android.car.hal.EvsHalService
+com.android.car.hal.TimeHalService
+com.android.car.hal.PropertyHalService

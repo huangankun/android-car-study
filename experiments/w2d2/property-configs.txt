@@ -1,0 +1,398 @@
+**All properties**
+Property:0x11100100, Property name:INFO_VIN, access:0x1, changeMode:0x0, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11100101, Property name:INFO_MAKE, access:0x1, changeMode:0x0, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11100102, Property name:INFO_MODEL, access:0x1, changeMode:0x0, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11100f21, Property name:POWER_POLICY_REQ, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11100f22, Property name:POWER_POLICY_GROUP_REQ, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11100f23, Property name:CURRENT_POWER_POLICY, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11200308, Property name:FUEL_DOOR_OPEN, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x1120030a, Property name:EV_CHARGE_PORT_OPEN, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x1120030b, Property name:EV_CHARGE_PORT_CONNECTED, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11200402, Property name:PARKING_BRAKE_ON, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11200403, Property name:PARKING_BRAKE_AUTO_APPLY, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11200405, Property name:FUEL_LEVEL_LOW, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11200407, Property name:NIGHT_MODE, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x1120040a, Property name:ABS_ACTIVE, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x1120040b, Property name:TRACTION_CONTROL_ACTIVE, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11200604, Property name:FUEL_CONSUMPTION_UNITS_DISTANCE_OVER_VOLUME, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11200b44, Property name:MIRROR_LOCK, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11200b45, Property name:MIRROR_FOLD, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11200f05, Property name:0x11200f05, access:0x1, changeMode:0x1, config:[568332561, 10, 9, 591397123, 6, -268435456, 627048706, 0, 0], fs min:0.000000, fs max:0.000000
+Property:0x11200f42, Property name:EV_CHARGE_SWITCH, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400103, Property name:INFO_MODEL_YEAR, access:0x1, changeMode:0x0, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400108, Property name:INFO_FUEL_DOOR_LOCATION, access:0x1, changeMode:0x0, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400109, Property name:INFO_EV_PORT_LOCATION, access:0x1, changeMode:0x0, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400303, Property name:ENGINE_OIL_LEVEL, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400400, Property name:GEAR_SELECTION, access:0x1, changeMode:0x1, config:[4, 1, 2, 8, 16, 32, 64, 128, 256], fs min:0.000000, fs max:0.000000
+Property:0x11400401, Property name:CURRENT_GEAR, access:0x1, changeMode:0x1, config:[4, 1, 2, 16, 32, 64, 128, 256], fs min:0.000000, fs max:0.000000
+Property:0x11400408, Property name:TURN_SIGNAL_STATE, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400409, Property name:IGNITION_STATE, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x1140050d, Property name:HVAC_STEERING_WHEEL_HEAT, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x0, f min:0.000000, f max:0.000000, i min:-2, i max:2, i64 min:0, i64 max:0
+Property:0x1140050e, Property name:HVAC_TEMPERATURE_DISPLAY_UNITS, access:0x3, changeMode:0x1, config:[49, 48], fs min:0.000000, fs max:0.000000
+Property:0x11400600, Property name:DISTANCE_DISPLAY_UNITS, access:0x3, changeMode:0x1, config:[35, 36], fs min:0.000000, fs max:0.000000
+	areaId:0x0, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x11400601, Property name:FUEL_VOLUME_DISPLAY_UNITS, access:0x3, changeMode:0x1, config:[65, 66], fs min:0.000000, fs max:0.000000
+Property:0x11400602, Property name:TIRE_PRESSURE_DISPLAY_UNITS, access:0x3, changeMode:0x1, config:[112, 113, 114], fs min:0.000000, fs max:0.000000
+Property:0x11400603, Property name:EV_BATTERY_DISPLAY_UNITS, access:0x3, changeMode:0x1, config:[96, 100, 101], fs min:0.000000, fs max:0.000000
+Property:0x11400605, Property name:0x11400605, access:0x3, changeMode:0x1, config:[1, 144, 145], fs min:0.000000, fs max:0.000000
+Property:0x11400a03, Property name:DISPLAY_BRIGHTNESS, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x0, f min:0.000000, f max:0.000000, i min:0, i max:100, i64 min:0, i64 max:0
+Property:0x11400e00, Property name:HEADLIGHTS_STATE, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400e01, Property name:HIGH_BEAM_LIGHTS_STATE, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400e03, Property name:HAZARD_LIGHTS_STATE, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400e10, Property name:HEADLIGHTS_SWITCH, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400e11, Property name:HIGH_BEAM_LIGHTS_SWITCH, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400e13, Property name:HAZARD_LIGHTS_SWITCH, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400f01, Property name:CABIN_LIGHTS_STATE, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400f02, Property name:CABIN_LIGHTS_SWITCH, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400f34, Property name:CLUSTER_SWITCH_UI, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400f37, Property name:CLUSTER_REQUEST_DISPLAY, access:0x2, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400f39, Property name:ELECTRONIC_TOLL_COLLECTION_CARD_TYPE, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400f3a, Property name:ELECTRONIC_TOLL_COLLECTION_CARD_STATUS, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400f3b, Property name:FRONT_FOG_LIGHTS_STATE, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400f3c, Property name:FRONT_FOG_LIGHTS_SWITCH, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400f3d, Property name:REAR_FOG_LIGHTS_STATE, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400f3e, Property name:REAR_FOG_LIGHTS_SWITCH, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400f41, Property name:EV_CHARGE_STATE, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400f43, Property name:EV_CHARGE_TIME_REMAINING, access:0x1, changeMode:0x2, config:[], fs min:1.000000, fs max:10.000000
+Property:0x11400f44, Property name:EV_REGENERATIVE_BRAKING_STATE, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400f45, Property name:TRAILER_PRESENT, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11400f46, Property name:VEHICLE_CURB_WEIGHT, access:0x1, changeMode:0x0, config:[2948], fs min:0.000000, fs max:0.000000
+Property:0x11410105, Property name:INFO_FUEL_TYPE, access:0x1, changeMode:0x0, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11410107, Property name:INFO_EV_CONNECTOR_TYPE, access:0x1, changeMode:0x0, config:[], fs min:0.000000, fs max:0.000000
+Property:0x1141010b, Property name:INFO_EXTERIOR_DIMENSIONS, access:0x1, changeMode:0x0, config:[], fs min:0.000000, fs max:0.000000
+Property:0x1141010c, Property name:INFO_MULTI_EV_PORT_LOCATIONS, access:0x1, changeMode:0x0, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11410a00, Property name:AP_POWER_STATE_REQ, access:0x1, changeMode:0x1, config:[3], fs min:0.000000, fs max:0.000000
+Property:0x11410a01, Property name:AP_POWER_STATE_REPORT, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11410a10, Property name:HW_KEY_INPUT, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11410a20, Property name:0x11410a20, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11410a30, Property name:0x11410a30, access:0x1, changeMode:0x1, config:[0, 0, 0, 3, 0, 0, 0, 0, 0], fs min:0.000000, fs max:0.000000
+Property:0x11410f10, Property name:0x11410f10, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11410f35, Property name:CLUSTER_DISPLAY_STATE, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11500606, Property name:EPOCH_TIME, access:0x2, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11500f31, Property name:WATCHDOG_ALIVE, access:0x2, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11500f33, Property name:VHAL_HEARTBEAT, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11510306, Property name:WHEEL_TICK, access:0x1, changeMode:0x2, config:[15, 50000, 50000, 50000, 50000], fs min:1.000000, fs max:10.000000
+Property:0x11600104, Property name:INFO_FUEL_CAPACITY, access:0x1, changeMode:0x0, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11600106, Property name:INFO_EV_BATTERY_CAPACITY, access:0x1, changeMode:0x0, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11600204, Property name:PERF_ODOMETER, access:0x1, changeMode:0x2, config:[], fs min:1.000000, fs max:10.000000
+Property:0x11600207, Property name:PERF_VEHICLE_SPEED, access:0x1, changeMode:0x2, config:[], fs min:1.000000, fs max:10.000000
+Property:0x11600208, Property name:PERF_VEHICLE_SPEED_DISPLAY, access:0x1, changeMode:0x2, config:[], fs min:1.000000, fs max:10.000000
+Property:0x11600209, Property name:PERF_STEERING_ANGLE, access:0x1, changeMode:0x2, config:[], fs min:1.000000, fs max:10.000000
+Property:0x11600210, Property name:PERF_REAR_STEERING_ANGLE, access:0x1, changeMode:0x2, config:[], fs min:1.000000, fs max:10.000000
+Property:0x11600301, Property name:ENGINE_COOLANT_TEMP, access:0x1, changeMode:0x2, config:[], fs min:1.000000, fs max:10.000000
+Property:0x11600304, Property name:ENGINE_OIL_TEMP, access:0x1, changeMode:0x2, config:[], fs min:0.100000, fs max:10.000000
+Property:0x11600305, Property name:ENGINE_RPM, access:0x1, changeMode:0x2, config:[], fs min:1.000000, fs max:10.000000
+Property:0x11600307, Property name:FUEL_LEVEL, access:0x1, changeMode:0x2, config:[], fs min:1.000000, fs max:100.000000
+Property:0x11600308, Property name:RANGE_REMAINING, access:0x3, changeMode:0x2, config:[], fs min:1.000000, fs max:2.000000
+Property:0x11600309, Property name:EV_BATTERY_LEVEL, access:0x1, changeMode:0x2, config:[], fs min:1.000000, fs max:100.000000
+Property:0x1160030c, Property name:EV_BATTERY_INSTANTANEOUS_CHARGE_RATE, access:0x1, changeMode:0x2, config:[], fs min:1.000000, fs max:10.000000
+Property:0x11600703, Property name:ENV_OUTSIDE_TEMPERATURE, access:0x1, changeMode:0x2, config:[], fs min:1.000000, fs max:2.000000
+Property:0x11600f3f, Property name:EV_CHARGE_CURRENT_DRAW_LIMIT, access:0x3, changeMode:0x1, config:[20], fs min:0.000000, fs max:0.000000
+Property:0x11600f40, Property name:EV_CHARGE_PERCENT_LIMIT, access:0x3, changeMode:0x1, config:[20, 40, 60, 80, 100], fs min:0.000000, fs max:0.000000
+Property:0x11610515, Property name:HVAC_TEMPERATURE_VALUE_SUGGESTION, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11700f38, Property name:CLUSTER_NAVIGATION_STATE, access:0x2, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11e00c00, Property name:VEHICLE_MAP_SERVICE, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11e00d00, Property name:OBD2_LIVE_FRAME, access:0x1, changeMode:0x1, config:[0, 0], fs min:0.000000, fs max:0.000000
+Property:0x11e00d01, Property name:OBD2_FREEZE_FRAME, access:0x1, changeMode:0x1, config:[0, 0], fs min:0.000000, fs max:0.000000
+Property:0x11e00d02, Property name:OBD2_FREEZE_FRAME_INFO, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11e00d03, Property name:OBD2_FREEZE_FRAME_CLEAR, access:0x2, changeMode:0x1, config:[1], fs min:0.000000, fs max:0.000000
+Property:0x11e00f07, Property name:INITIAL_USER_INFO, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11e00f08, Property name:SWITCH_USER, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11e00f09, Property name:CREATE_USER, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11e00f0a, Property name:REMOVE_USER, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11e00f0b, Property name:USER_IDENTIFICATION_ASSOCIATION, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11e00f32, Property name:WATCHDOG_TERMINATED_PROCESS, access:0x2, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x11e00f36, Property name:CLUSTER_REPORT_STATE, access:0x2, changeMode:0x1, config:[0, 0, 0, 11, 0, 0, 0, 0, 16], fs min:0.000000, fs max:0.000000
+Property:0x13200504, Property name:HVAC_DEFROSTER, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x2, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x13200514, Property name:HVAC_ELECTRIC_DEFROSTER_ON, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x2, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x13200bc4, Property name:WINDOW_LOCK, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x540, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x13400bc0, Property name:WINDOW_POS, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+	areaId:0x100, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+	areaId:0x400, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+	areaId:0x10000, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+Property:0x13400bc1, Property name:WINDOW_MOVE, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x100, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x400, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x10000, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+Property:0x1440050c, Property name:HVAC_SIDE_MIRROR_HEAT, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x3, f min:0.000000, f max:0.000000, i min:0, i max:2, i64 min:0, i64 max:0
+Property:0x14400b40, Property name:MIRROR_Z_POS, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-3, i max:3, i64 min:0, i64 max:0
+	areaId:0x2, f min:0.000000, f max:0.000000, i min:-3, i max:3, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-3, i max:3, i64 min:0, i64 max:0
+Property:0x14400b41, Property name:MIRROR_Z_MOVE, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x2, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+Property:0x14400b42, Property name:MIRROR_Y_POS, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-3, i max:3, i64 min:0, i64 max:0
+	areaId:0x2, f min:0.000000, f max:0.000000, i min:-3, i max:3, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-3, i max:3, i64 min:0, i64 max:0
+Property:0x14400b43, Property name:MIRROR_Y_MOVE, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x2, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+Property:0x15200505, Property name:HVAC_AC_ON, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x75, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x15200506, Property name:HVAC_MAX_AC_ON, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x75, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x15200507, Property name:HVAC_MAX_DEFROST_ON, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x5, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x70, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x15200508, Property name:HVAC_RECIRC_ON, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x75, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x15200509, Property name:HVAC_DUAL_ON, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x75, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x1520050a, Property name:HVAC_AUTO_ON, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x75, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x15200510, Property name:HVAC_POWER_ON, access:0x3, changeMode:0x1, config:[356517120, 356517121], fs min:0.000000, fs max:0.000000
+	areaId:0x75, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x15200512, Property name:HVAC_AUTO_RECIRC_ON, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x75, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x15200b82, Property name:SEAT_BELT_BUCKLED, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x1540010a, Property name:INFO_DRIVER_SEAT, access:0x1, changeMode:0x0, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x0, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x15400500, Property name:HVAC_FAN_SPEED, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x75, f min:0.000000, f max:0.000000, i min:1, i max:7, i64 min:0, i64 max:0
+Property:0x15400501, Property name:HVAC_FAN_DIRECTION, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x75, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x1540050b, Property name:HVAC_SEAT_TEMPERATURE, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-2, i max:2, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-2, i max:2, i64 min:0, i64 max:0
+Property:0x1540050f, Property name:HVAC_ACTUAL_FAN_SPEED_RPM, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x75, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x15400513, Property name:HVAC_SEAT_VENTILATION, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:0, i max:3, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:0, i max:3, i64 min:0, i64 max:0
+Property:0x15400b80, Property name:SEAT_MEMORY_SELECT, access:0x2, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:0, i max:3, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:0, i max:3, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:0, i max:3, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:0, i max:3, i64 min:0, i64 max:0
+Property:0x15400b81, Property name:SEAT_MEMORY_SET, access:0x2, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:0, i max:3, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:0, i max:3, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:0, i max:3, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:0, i max:3, i64 min:0, i64 max:0
+Property:0x15400b83, Property name:SEAT_BELT_HEIGHT_POS, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+Property:0x15400b84, Property name:SEAT_BELT_HEIGHT_MOVE, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+Property:0x15400b85, Property name:SEAT_FORE_AFT_POS, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+Property:0x15400b86, Property name:SEAT_FORE_AFT_MOVE, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+Property:0x15400b87, Property name:SEAT_BACKREST_ANGLE_1_POS, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+Property:0x15400b88, Property name:SEAT_BACKREST_ANGLE_1_MOVE, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+Property:0x15400b89, Property name:SEAT_BACKREST_ANGLE_2_POS, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+Property:0x15400b8a, Property name:SEAT_BACKREST_ANGLE_2_MOVE, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+Property:0x15400b8b, Property name:SEAT_HEIGHT_POS, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+Property:0x15400b8c, Property name:SEAT_HEIGHT_MOVE, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+Property:0x15400b8d, Property name:SEAT_DEPTH_POS, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+Property:0x15400b8e, Property name:SEAT_DEPTH_MOVE, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+Property:0x15400b8f, Property name:SEAT_TILT_POS, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+Property:0x15400b90, Property name:SEAT_TILT_MOVE, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+Property:0x15400b91, Property name:SEAT_LUMBAR_FORE_AFT_POS, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:-10, i max:10, i64 min:0, i64 max:0
+Property:0x15400b92, Property name:SEAT_LUMBAR_FORE_AFT_MOVE, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+Property:0x15400b93, Property name:SEAT_LUMBAR_SIDE_SUPPORT_POS, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+Property:0x15400b94, Property name:SEAT_LUMBAR_SIDE_SUPPORT_MOVE, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+Property:0x15400b96, Property name:SEAT_HEADREST_HEIGHT_MOVE, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+Property:0x15400b97, Property name:SEAT_HEADREST_ANGLE_POS, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+Property:0x15400b98, Property name:SEAT_HEADREST_ANGLE_MOVE, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+Property:0x15400b99, Property name:SEAT_HEADREST_FORE_AFT_POS, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:0, i max:10, i64 min:0, i64 max:0
+Property:0x15400b9a, Property name:SEAT_HEADREST_FORE_AFT_MOVE, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:-1, i max:1, i64 min:0, i64 max:0
+Property:0x15400bb0, Property name:SEAT_OCCUPANCY, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x15400f03, Property name:READING_LIGHTS_STATE, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x15400f04, Property name:READING_LIGHTS_SWITCH, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x20, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x15410511, Property name:HVAC_FAN_DIRECTION_AVAILABLE, access:0x1, changeMode:0x0, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x75, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x15600502, Property name:HVAC_TEMPERATURE_CURRENT, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x31, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x44, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x15600503, Property name:HVAC_TEMPERATURE_SET, access:0x3, changeMode:0x1, config:[160, 280, 5, 608, 824, 9], fs min:0.000000, fs max:0.000000
+	areaId:0x31, f min:16.000000, f max:32.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x44, f min:16.000000, f max:32.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x16200b02, Property name:DOOR_LOCK, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x16400b00, Property name:DOOR_POS, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:0, i max:1, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:0, i max:1, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:0, i max:1, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:0, i max:1, i64 min:0, i64 max:0
+	areaId:0x20000000, f min:0.000000, f max:0.000000, i min:0, i max:1, i64 min:0, i64 max:0
+Property:0x17600309, Property name:TIRE_PRESSURE, access:0x1, changeMode:0x2, config:[], fs min:1.000000, fs max:2.000000
+	areaId:0x1, f min:193.000000, f max:300.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x2, f min:193.000000, f max:300.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x4, f min:193.000000, f max:300.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x8, f min:193.000000, f max:300.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x1760030a, Property name:CRITICALLY_LOW_TIRE_PRESSURE, access:0x1, changeMode:0x0, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x2, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x8, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x21100104, Property name:0x21100104, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x21102a11, Property name:0x21102a11, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x21202a11, Property name:0x21202a11, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x21400f34, Property name:0x21400f34, access:0x2, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x21400f37, Property name:0x21400f37, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x21402a11, Property name:0x21402a11, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x21410f35, Property name:0x21410f35, access:0x2, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x21602a11, Property name:0x21602a11, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x21700f38, Property name:0x21700f38, access:0x1, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x21702a12, Property name:0x21702a12, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+Property:0x21e00f36, Property name:0x21e00f36, access:0x1, changeMode:0x1, config:[0, 0, 0, 11, 0, 0, 0, 0, 16], fs min:0.000000, fs max:0.000000
+Property:0x21e01111, Property name:0x21e01111, access:0x3, changeMode:0x1, config:[1, 1, 0, 2, 0, 0, 1, 0, 0], fs min:0.000000, fs max:0.000000
+Property:0x23400103, Property name:0x23400103, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:-100, i max:100, i64 min:0, i64 max:0
+	areaId:0x2, f min:0.000000, f max:0.000000, i min:-100, i max:100, i64 min:0, i64 max:0
+	areaId:0x10000, f min:0.000000, f max:0.000000, i min:-100, i max:100, i64 min:0, i64 max:0
+Property:0x25600102, Property name:0x25600102, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x31, f min:-10.000000, f max:10.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x44, f min:-10.000000, f max:10.000000, i min:0, i max:0, i64 min:0, i64 max:0
+Property:0x26200101, Property name:0x26200101, access:0x3, changeMode:0x1, config:[], fs min:0.000000, fs max:0.000000
+	areaId:0x1, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x4, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x10, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0
+	areaId:0x40, f min:0.000000, f max:0.000000, i min:0, i max:0, i64 min:0, i64 max:0

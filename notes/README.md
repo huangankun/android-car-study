@@ -11,6 +11,7 @@
 | W1D5 | [第一次改代码](./w1d5-第一次改代码-stepper.md) |
 | W1D7 | [周复盘](./w1d7-周复盘.md) |
 | W2D1 | [AAOS 镜像试跑](./w2d1-aaos镜像试跑-stepper.md) + [车服务地图](./w2d1-car-service-map.md) |
+| W2D2 | [dumpsys car_service 实验](./w2d2-dumpsys-car-service实验-stepper.md) |
 
 > W1D6（文章底稿）在 [articles/](../articles/)。
 

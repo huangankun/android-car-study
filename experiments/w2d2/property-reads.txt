@@ -1,0 +1,6 @@
+GEAR_SELECTION:
+Property:0x11400400, status: 0, timestamp: 1375801667, zone: 0x0, floatValues: [], int32Values: [4], int64Values: [], bytes: [], string: 
+PERF_VEHICLE_SPEED:
+Property:0x11600207, status: 0, timestamp: 363201082381, zone: 0x0, floatValues: [0.0], int32Values: [], int64Values: [], bytes: [], string: 
+NIGHT_MODE:
+Property:0x11200407, status: 0, timestamp: 1375801417, zone: 0x0, floatValues: [], int32Values: [0], int64Values: [], bytes: [], string: 

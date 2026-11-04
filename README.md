@@ -46,7 +46,7 @@
 └── LICENSE
 ```
 
-## 当前进度（8/28）
+## 当前进度（9/28）
 
 - [x] **W1D1** 环境搭建（cmdline-tools + arm64 模拟器 + AVD boot）
 - [x] **W1D2** dumpsys 十连（10 条系统服务 dump，含逐段讲解）
@@ -56,6 +56,7 @@
 - [x] **W1D6** 文章底稿定稿《Shizuku 源码解读》（掘金暂缓，发布并入多平台分发待办）
 - [x] **W1D7** 周复盘（[`notes/w1d7-周复盘.md`](./notes/w1d7-周复盘.md)）
 - [x] **W2D1** AAOS 镜像试跑（Android 13 automotive arm64 启动成功，`dumpsys car_service` 1733 行）｜[车服务地图](./notes/w2d1-car-service-map.md)
+- [x] **W2D2** dumpsys car_service 玩熟 + 属性读写 + service call 实验｜[stepper](./notes/w2d2-dumpsys-car-service实验-stepper.md)
 - [ ] **W2** AAOS 黄金链路：Vehicle HAL → CarService → CarPropertyManager → App（进行中）
 
 ## 文章索引
@@ -77,6 +78,7 @@
 - 2026-11-01：W1D5 首次改代码验证通过 + W1D6 文章 v1
 - 2026-11-02：W1D6 文章底稿定稿；W1D7 周复盘 → **W1 完成（7/28）**；掘金暂缓，发布并入「多平台分发」待办
 - 2026-11-03：W2D1 AAOS 镜像试跑成功（复合 tag + QEMU 逗号坑已解，`dumpsys car_service` 1733 行）
+- 2026-11-03：W2D2 属性读写闭环 + service call 实验（事务码 11~19；`inject-vhal-event` 在模拟器不生效）
 
 ## License
 

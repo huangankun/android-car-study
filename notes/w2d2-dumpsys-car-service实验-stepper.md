@@ -82,18 +82,46 @@ Property:0x1140050e, ..., int32Values: [49], ...
 ```
 **这就是完整闭环**：写成功 → 读回新值 → 恢复。比「dump 出来看看」深一层。
 
-### S5 · VHAL 注入（失败，但很有价值）⚠️
+### S5 · VHAL 注入：它根本不是「写」（重要认知）⚠️
 ```bash
-adb shell cmd car_service inject-vhal-event 0x11400400 0 8   # 注入 GEAR_SELECTION=8(DRIVE)
-adb shell cmd car_service get-property-value 0x11400400       # 读回仍是 4，没变
+adb shell cmd car_service inject-vhal-event 0x11400400 0 8   # 注入 GEAR_SELECTION=8
+adb shell cmd car_service get-property-value 0x11400400       # 读回仍是 4
 ```
 logcat 显示命令确实执行了：
 ```text
 CarShellCommand: Injecting VHAL event: prop=0x11400400, zone=0, value=8, isError=false, delayTime=0
 ```
-但属性值和时间戳都没变 → **注入被模拟器的 VHAL 丢弃**。见问题日志 P1。
+**为什么读回还是旧值？** 看源码（android13-release `VehicleHal.java:936`）：
+```java
+public void injectVhalEvent(int property, int zone, String value, int delayTime) {
+    HalPropValue v = createPropValueForInjecting(...);
+    if (v == null) return;
+    mHandler.post(() -> onPropertyEvent(Lists.newArrayList(v)));  // 只伪造一次「VHAL 上报」
+}
+```
+**它只做一件事：伪造一个「VHAL 上报了新值」的事件，投给订阅者（`registerCallback` 的 App）。它不写 VHAL 的存储值。**
+所以同步 `get()` 读真实存储值，当然还是 4。这不是 bug，是设计：
+- `inject-vhal-event` = 模拟车端**发来**信号（只对订阅者生效）
+- `set-property-value` = 改车端**状态**（只对可写属性生效）
+- `get-property-value` = 读车端**当前真实值**（看不到注入，除非注入改的是存储值）
 
-### S6 · 裸 `service call`（能打，但不可读）⚠️
+### S6 · 只读属性到底能不能写？（对照实验）✅
+```bash
+adb shell cmd car_service set-property-value 0x11400400 0 8   # GEAR_SELECTION, access:0x1
+```
+真实输出：
+```text
+Cannot set a property: ... Failed to set value for: 0x11400400, areaId: 0x0,
+error: ...VehiclePropValue{...} (code 4)
+```
+`code 4 = StatusCode.ACCESS_DENIED`（AIDL 枚举确认）。**拒绝来自 VHAL**（错误里是 `android.hardware.automotive.vehicle.VehiclePropValue`），因为档位被定义成只读——真车也一样，不是模拟器问题。
+
+对照 `HVAC_TEMPERATURE_DISPLAY_UNITS`（access:0x3）：
+```text
+Property(0x1140050e) is set to 48 successfully   ← 可读写，成功
+```
+
+### S7 · 裸 `service call`（能打，但不可读）⚠️
 先查 ICar 的 AIDL 事务码（不是 1~10）：
 ```text
 getCarService(String)            = 11
@@ -121,7 +149,8 @@ Result: Parcel(
 
 | # | 症状 | 原因 | 结论/解法 |
 |---|---|---|---|
-| P1 | `inject-vhal-event` 执行了（logcat 有记录），但属性值不变 | 模拟器的 VHAL 实现不应用注入（fake VHAL 的注入存储没被读路径用上） | 模拟器上别指望注入；用 `set-property-value`（可写属性）或改源码验证 |
+| P1 | `inject-vhal-event` 执行了（logcat 有记录），但 `get-property-value` 读回旧值 | `injectVhalEvent()` 只伪造一次 `onPropertyEvent` 回调**投给订阅者**，**不写 VHAL 存储值**；`get()` 读真实值，所以看不到 | 想验证注入要写**订阅者**（`registerCallback`）；改状态用 `set-property-value`（仅 0x3 可写）。这是设计，不是 bug |
+| P1b | 对 `GEAR_SELECTION` 调 `set-property-value` 报 `(code 4)` | `code 4 = ACCESS_DENIED`；**拒绝来自 VHAL**（属性被定义成只读 access:0x1） | 只读属性真车上也写不进（档位只能车产生）；要写就选 `access:0x3` 的属性 |
 | P2 | `service call car_service 1/2` 报 `Not a data message` / 花屏 | 事务码不是从 1 开始；ICar 的码是 11~19 | 查 AIDL 的 `= N`；先 `--help` 看有没有更友好的 `cmd` |
 | P3 | `service call car_service 16` 返回 `SecurityException: requires android.car.permission.CONTROL_CAR_...` | shell UID 没有该权限 | 换不需要权限的方法，或 `adb root` 后再试 |
 | P4 | `get-carpropertyconfig` 输出 398 行，找不到目标属性 | 全量太大 | `grep -iE "KEYWORD|access:0x3"` 过滤；或直接 `get-carpropertyconfig <propId>` |

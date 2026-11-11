@@ -12,6 +12,7 @@
 | W1D7 | [周复盘](./w1d7-周复盘.md) |
 | W2D1 | [AAOS 镜像试跑](./w2d1-aaos镜像试跑-stepper.md) + [车服务地图](./w2d1-car-service-map.md) |
 | W2D2 | [dumpsys car_service 实验](./w2d2-dumpsys-car-service实验-stepper.md) + [排障方法论](./w2d2-车服务排障方法论.md) |
+| W2D3 | [黄金链路精读](./w2d3-黄金链路导读-stepper.md) + [逐行注释](./w2d3/) |
 
 > W1D6（文章底稿）在 [articles/](../articles/)。
 

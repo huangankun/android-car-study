@@ -7,6 +7,7 @@
 | **第一份** | [ICarProperty-annotated.md](./ICarProperty-annotated.md) | binder 契约（事务码 0~7）+ 双向 binder | 10 min |
 | **第二份** | [CarPropertyManager-annotated.md](./CarPropertyManager-annotated.md) | App 侧 API + 错误码翻译 | 25 min |
 | **第三份** | [示例App-读车速.md](./示例App-读车速.md) | 一个最简 App 怎么读车速 | 10 min |
+| **概念** | [概念辨析.md](./概念辨析.md) | Stub 与 Binder、强弱类型、Class&lt;E&gt; 为什么 | 15 min |
 
 > 原始文件已存档在 [src/](./src/)（AOSP Apache 2.0）。
 

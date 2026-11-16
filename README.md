@@ -26,25 +26,103 @@
 
 ## 目录结构
 
+<!-- TREE:START -->
 ```
-.
-├── articles/                    # 解读文章（问题 → 机制 → 验证）
-│   └── 01-shizuku源码解读.md
-├── notes/                       # 每个任务的 stepper 文档（任务卡 / 步骤 / 问题日志 / 自测）
+./
+├── articles/
+│   ├── 01-shizuku源码解读.md
+│   └── README.md
+├── experiments/
+│   ├── w1d5-first-modification/
+│   │   ├── build-info.txt
+│   │   ├── logcat-evidence.txt
+│   │   └── modification.patch
+│   ├── w2d1-aaos/
+│   │   ├── build-info.txt
+│   │   ├── build-props.txt
+│   │   ├── car-service-list.txt
+│   │   ├── dumpsys-car_service.txt
+│   │   └── screenshot-launcher.png
+│   ├── w2d2/
+│   │   ├── hals.txt
+│   │   ├── inject-vhal-test.txt
+│   │   ├── property-configs.txt
+│   │   ├── property-reads.txt
+│   │   ├── service-call.txt
+│   │   └── services.txt
+│   ├── w2d5/
+│   │   ├── inject-timeline.txt
+│   │   └── logcat-property-chain.txt
+│   └── README.md
+├── notes/
+│   ├── dumpsys/
+│   │   ├── 01-activity.md
+│   │   ├── 02-window.md
+│   │   ├── 03-package.md
+│   │   ├── 04-permission.md
+│   │   ├── 05-power.md
+│   │   ├── 06-battery.md
+│   │   ├── 07-meminfo.md
+│   │   ├── 08-cpuinfo.md
+│   │   ├── 09-gfxinfo.md
+│   │   ├── 10-services.md
+│   │   └── README.md
+│   ├── w1d3/
+│   │   ├── BinderSender-annotated.md
+│   │   ├── README.md
+│   │   ├── ServiceStarter-annotated.md
+│   │   ├── ShizukuService-annotated.md
+│   │   ├── ShizukuUserServiceManager-annotated.md
+│   │   └── shizuku-architecture.html
+│   ├── w2d3/
+│   │   ├── src/
+│   │   │   ├── CarPropertyService.java
+│   │   │   ├── IVehicle.aidl
+│   │   │   ├── PropertyHalService.java
+│   │   │   ├── README.md
+│   │   │   └── VehicleHal.java
+│   │   ├── CarPropertyService-annotated.md
+│   │   ├── IVehicle-annotated.md
+│   │   ├── PropertyHalService-annotated.md
+│   │   ├── README.md
+│   │   └── VehicleHal-annotated.md
+│   ├── w2d4/
+│   │   ├── src/
+│   │   │   ├── CarPropertyManager.java
+│   │   │   ├── ICarProperty.aidl
+│   │   │   └── README.md
+│   │   ├── CarPropertyManager-annotated.md
+│   │   ├── ICarProperty-annotated.md
+│   │   ├── README.md
+│   │   ├── 概念辨析.md
+│   │   └── 示例App-读车速.md
+│   ├── README.md
 │   ├── w1d1-环境搭建-stepper.md
 │   ├── w1d2-dumpsys十连-stepper.md
 │   ├── w1d3-shizuku导读-stepper.md
 │   ├── w1d4-深读与问题清单-stepper.md
 │   ├── w1d5-第一次改代码-stepper.md
-│   ├── dumpsys/                 # 10 条系统服务 dump：逐段讲解 + 完整原始输出
-│   └── w1d3/                    # Shizuku 源码逐行注释 + 架构时序图（HTML）
-├── experiments/                 # 代码修改 patch / logcat 证据 / 截图
-│   ├── w1d5-first-modification/ # 第一次改代码：patch + logcat + 构建信息
-│   └── w2d1-aaos/               # AAOS 镜像：dumpsys car_service + 服务清单 + 构建信息
-├── traces/                      # perfetto trace（W3 预留）
-├── README.md
-└── LICENSE
+│   ├── w1d7-周复盘.md
+│   ├── w2d1-aaos镜像试跑-stepper.md
+│   ├── w2d1-car-service-map.md
+│   ├── w2d2-dumpsys-car-service实验-stepper.md
+│   ├── w2d2-车服务排障方法论.md
+│   ├── w2d3-黄金链路导读-stepper.md
+│   ├── w2d4-三层异步辨析.md
+│   ├── w2d4-黄金链路App侧-stepper.md
+│   └── w2d5-logcat追踪-stepper.md
+├── scripts/
+│   ├── README.md
+│   └── check_readme.py
+├── traces/
+│   └── README.md
+├── .gitignore
+├── LICENSE
+└── README.md
 ```
+<!-- TREE:END -->
+
+> 目录树由 `scripts/check_readme.py --fix` 自动生成，手改无效。
 
 ## 当前进度（12/28）
 

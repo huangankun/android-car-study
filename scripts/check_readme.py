@@ -8,6 +8,7 @@
   3. 所有含内容文件的目录都有 README.md（内容文件 = .md/.java/.aidl/.py/.sh/.txt/.html/.png/.json/.patch，不含 README 自身）
   4. notes/ 下每个 .md 都被 notes/README.md 提及（索引完整）
   5. 根 README「更新记录」日期真实：无未来日期；最新一条必须 = 当天
+  6. 根 README「目录结构」树与实际文件（git ls-files）一致
 
 用法：
   python3 scripts/check_readme.py          # 只报告；exit 0=干净，1=有问题
@@ -163,6 +164,73 @@ def check_dates():
         error(f"更新记录最新日期 {dates[-1]} ≠ 今天 {today}（最新一条应记当天，别抄旧日期）")
 
 
+def _repo_files():
+    """仓库实际文件（已暂存 + 未暂存未忽略），相对路径。"""
+    import subprocess
+    try:
+        out = subprocess.check_output(
+            ["git", "-C", REPO, "-c", "core.quotePath=false",
+             "ls-files", "--cached", "--others", "--exclude-standard"],
+            stderr=subprocess.DEVNULL).decode()
+        return [l for l in out.splitlines() if l.strip()]
+    except Exception:
+        rels = []
+        for root, dirs, files in os.walk(REPO):
+            dirs[:] = [d for d in dirs if d != ".git" and not d.startswith(".")]
+            for f in files:
+                if f.startswith("."):
+                    continue
+                rels.append(os.path.relpath(os.path.join(root, f), REPO))
+        return sorted(rels)
+
+
+def generate_tree():
+    """从实际文件生成 ASCII 目录树（目录在前、文件在后，各自按字典序）。"""
+    root = {}
+    for f in _repo_files():
+        parts = f.split("/")
+        node = root
+        for p in parts[:-1]:
+            node = node.setdefault(p, {})
+        node[parts[-1]] = None
+    lines = ["./"]
+    def rec(node, prefix):
+        keys = sorted(node, key=lambda k: (0 if isinstance(node[k], dict) else 1, k))
+        for i, k in enumerate(keys):
+            last = i == len(keys) - 1
+            lines.append(prefix + ("└── " if last else "├── ") + k
+                       + ("/" if isinstance(node[k], dict) else ""))
+            if isinstance(node[k], dict):
+                rec(node[k], prefix + ("    " if last else "│   "))
+    rec(root, "")
+    return "\n".join(lines)
+
+
+def check_tree():
+    """检查 6：README 目录结构树与实际文件一致。"""
+    readme = os.path.join(REPO, "README.md")
+    txt = open(readme, encoding="utf-8").read()
+    m = re.search(r"<!-- TREE:START -->\n```[^\n]*\n(.*?)\n```\n<!-- TREE:END -->", txt, re.S)
+    if not m:
+        error("根 README 找不到「<!-- TREE:START -->…<!-- TREE:END -->」目录结构标记块")
+        return
+    if m.group(1).strip() != generate_tree().strip():
+        error("根 README「目录结构」树与实际文件不一致（跑 --fix 自动重建）")
+
+
+def fix_tree():
+    """用实际文件重建 README 目录结构树。"""
+    readme = os.path.join(REPO, "README.md")
+    txt = open(readme, encoding="utf-8").read()
+    actual = generate_tree()
+    new = re.sub(
+        r"(<!-- TREE:START -->\n```[^\n]*\n).*?(\n```\n<!-- TREE:END -->)",
+        lambda mm: mm.group(1) + actual + mm.group(2), txt, flags=re.S)
+    if new != txt:
+        open(readme, "w", encoding="utf-8").write(new)
+        print("→ 已自动重建 README 目录结构树")
+
+
 def fix_progress(done, total):
     readme = os.path.join(REPO, "README.md")
     txt = open(readme, encoding="utf-8").read()
@@ -180,12 +248,13 @@ def main():
     check_dir_readme()
     check_notes_index()
     check_dates()
+    check_tree()
 
     errors = [m for lvl, m in ISSUES if lvl == "error"]
     warns = [m for lvl, m in ISSUES if lvl == "warn"]
 
     if not ISSUES:
-        print("✅ README 全量校验通过：进度一致 · 无死链 · 目录 README 齐全 · 笔记索引完整")
+        print("✅ README 全量校验通过：进度一致 · 无死链 · 目录 README 齐全 · 笔记索引完整 · 目录树一致 · 日期真实")
         return 0
 
     for m in errors:
@@ -193,8 +262,10 @@ def main():
     for m in warns:
         print("⚠️  " + m)
 
-    if fix and done_total:
-        fix_progress(done_total[0], done_total[1])
+    if fix:
+        if done_total:
+            fix_progress(done_total[0], done_total[1])
+        fix_tree()
 
     return 1
 

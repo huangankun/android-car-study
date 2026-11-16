@@ -80,11 +80,11 @@
 - 2026-10-31：W1D3-W1D4（Shizuku 导读 + 深读）+ W1D5 环境搭建（NDK/Java 21）
 - 2026-11-01：W1D5 首次改代码验证通过 + W1D6 文章 v1
 - 2026-11-02：W1D6 文章底稿定稿；W1D7 周复盘 → **W1 完成（7/28）**；掘金暂缓，发布并入「多平台分发」待办
-- 2026-11-03：W2D1 AAOS 镜像试跑成功（复合 tag + QEMU 逗号坑已解，`dumpsys car_service` 1733 行）
-- 2026-11-03：W2D2 属性读写闭环 + service call 实验（事务码 11~19；`inject-vhal-event` 在模拟器不生效）
-- 2026-11-03：W2D3 黄金链路精读（读/写/事件三条路径 + 4 份逐行注释 + AOSP 源码存档）
-- 2026-11-03：W2D4 精读 CarPropertyManager → 示例 App（双向 binder + 错误码翻译，黄金链路打通）
-- 2026-11-03：W2D5 logcat 追踪真实属性请求（CarShellCommand 入口、mSyncGetSetPropertyOpCount、注入时间戳对比）
+- 2026-11-03：W2D1 AAOS 镜像试跑成功（复合 tag + QEMU 逗号坑已解）+ W2D2 属性读写闭环 + service call 实验
+- 2026-11-04：W2D2 修正 inject 认知（伪造事件非写操作）+ 新增车服务排障方法论
+- 2026-11-11：W2D3 黄金链路精读（Vehicle HAL → CarService 三条路径 + 4 份逐行注释 + AOSP 源码存档）
+- 2026-11-13：W2D4 精读 CarPropertyManager → 示例 App（双向 binder + 错误码翻译）+ 概念辨析（Stub/强弱类型）
+- 2026-11-16：W2D4 复习（三层异步辨析）+ W2D5 logcat 追踪 + README 全量校验脚本 check_readme.py
 
 ## License
 

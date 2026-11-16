@@ -2,11 +2,12 @@
 # -*- coding: utf-8 -*-
 """check_readme.py — README 全量校验（提交前必跑，机器检查代替人肉记忆）
 
-检查 4 项：
+检查 5 项：
   1. 根 README「当前进度（X/N）」与 ~/.hermes/data/todo/todo.json 的 learn 数组 done/total 一致
   2. 所有 README.md 里的相对链接无死链
   3. 所有含内容文件的目录都有 README.md（内容文件 = .md/.java/.aidl/.py/.sh/.txt/.html/.png/.json/.patch，不含 README 自身）
   4. notes/ 下每个 .md 都被 notes/README.md 提及（索引完整）
+  5. 根 README「更新记录」日期真实：无未来日期；最新一条必须 = 当天
 
 用法：
   python3 scripts/check_readme.py          # 只报告；exit 0=干净，1=有问题
@@ -18,6 +19,7 @@ import os
 import re
 import sys
 import json
+from datetime import date
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TODO = os.path.expanduser("~/.hermes/data/todo/todo.json")
@@ -145,6 +147,22 @@ def check_notes_index():
                     warn(f"notes/{sub}/{f} 未被 notes/{sub}/README.md 提及")
 
 
+def check_dates():
+    """检查 5：更新记录日期真实（无未来日期；最新一条必须 = 当天）。"""
+    readme = os.path.join(REPO, "README.md")
+    txt = open(readme, encoding="utf-8").read()
+    dates = re.findall(r"^\s*-\s+(\d{4}-\d{2}-\d{2})：", txt, flags=re.M)
+    if not dates:
+        warn("根 README 更新记录没有「- YYYY-MM-DD：」格式的日期")
+        return
+    today = date.today().isoformat()
+    for d in dates:
+        if d > today:
+            error(f"更新记录出现未来日期 {d}（今天 {today}）")
+    if dates[-1] != today:
+        error(f"更新记录最新日期 {dates[-1]} ≠ 今天 {today}（最新一条应记当天，别抄旧日期）")
+
+
 def fix_progress(done, total):
     readme = os.path.join(REPO, "README.md")
     txt = open(readme, encoding="utf-8").read()
@@ -161,6 +179,7 @@ def main():
     check_deadlinks()
     check_dir_readme()
     check_notes_index()
+    check_dates()
 
     errors = [m for lvl, m in ISSUES if lvl == "error"]
     warns = [m for lvl, m in ISSUES if lvl == "warn"]

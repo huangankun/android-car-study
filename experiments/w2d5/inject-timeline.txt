@@ -1,0 +1,4 @@
+=== 注入前 ===
+Property:0x11600207, status: 0, timestamp: 63600132612, zone: 0x0, floatValues: [0.0], int32Values: [], int64Values: [], bytes: [], string: 
+=== 注入后 ===
+Property:0x11600207, status: 0, timestamp: 64604768696, zone: 0x0, floatValues: [0.0], int32Values: [], int64Values: [], bytes: [], string: 

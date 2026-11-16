@@ -46,7 +46,7 @@
 └── LICENSE
 ```
 
-## 当前进度（11/28）
+## 当前进度（12/28）
 
 - [x] **W1D1** 环境搭建（cmdline-tools + arm64 模拟器 + AVD boot）
 - [x] **W1D2** dumpsys 十连（10 条系统服务 dump，含逐段讲解）
@@ -59,6 +59,7 @@
 - [x] **W2D2** dumpsys car_service 玩熟 + 属性读写 + service call 实验｜[stepper](./notes/w2d2-dumpsys-car-service实验-stepper.md)
 - [x] **W2D3** 黄金链路精读（Vehicle HAL → CarService：读/写/事件三条路径 + 4 份逐行注释）｜[stepper](./notes/w2d3-黄金链路导读-stepper.md)
 - [x] **W2D4** 精读 CarPropertyManager → 示例 App（双向 binder + 错误码翻译，黄金链路打通）｜[stepper](./notes/w2d4-黄金链路App侧-stepper.md)
+- [x] **W2D5** logcat 追踪真实属性请求（CarShellCommand 入口 + mSyncGetSetPropertyOpCount + 注入时间戳对比）
 - [ ] **W2** AAOS 黄金链路：Vehicle HAL → CarService → CarPropertyManager → App（进行中）
 
 ## 文章索引
@@ -83,6 +84,7 @@
 - 2026-11-03：W2D2 属性读写闭环 + service call 实验（事务码 11~19；`inject-vhal-event` 在模拟器不生效）
 - 2026-11-03：W2D3 黄金链路精读（读/写/事件三条路径 + 4 份逐行注释 + AOSP 源码存档）
 - 2026-11-03：W2D4 精读 CarPropertyManager → 示例 App（双向 binder + 错误码翻译，黄金链路打通）
+- 2026-11-03：W2D5 logcat 追踪真实属性请求（CarShellCommand 入口、mSyncGetSetPropertyOpCount、注入时间戳对比）
 
 ## License
 

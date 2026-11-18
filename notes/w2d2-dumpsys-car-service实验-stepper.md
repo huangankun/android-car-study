@@ -2,7 +2,7 @@
 
 > 任务：把 `dumpsys car_service` 的各个切面玩熟，并亲手做一次「读属性 → 写属性 → 读回」闭环和一次裸 `service call`。
 > 执行人：Hermes（导师）｜学习者：先生
-> 证据：`experiments/w2d2/`（398 条属性配置 + 33 服务 + service call 原始输出 + 注入测试）
+> 证据：`experiments/w2d2/`（178 条属性配置 + 33 服务 + service call 原始输出 + 注入测试）
 > 方法论：[`notes/w2d2-车服务排障方法论.md`](./w2d2-车服务排障方法论.md)（七层定位框架 + 8 个场景手册 + 面试话术）
 
 ## 任务卡
@@ -29,9 +29,9 @@ adb shell dumpsys car_service --help          # 全部选项
 ```
 **讲解**：`--services` 和 `--hal` 是排查神器——1733 行的全量 dump 里眼睛会瞎，按名字切一刀就只剩几十行。
 
-### S2 · 把 propId 翻成名字（398 条属性表）✅
+### S2 · 把 propId 翻成名字（178 条属性表）✅
 ```bash
-adb shell cmd car_service get-carpropertyconfig            # 全部 398 条
+adb shell cmd car_service get-carpropertyconfig            # 全部 178 条
 adb shell cmd car_service get-carpropertyconfig 0x11400400 # 单条
 ```
 真实输出（节选）：
@@ -42,7 +42,7 @@ Property:0x11400400, Property name:GEAR_SELECTION, access:0x1, changeMode:0x1, c
 Property:0x11600207, Property name:PERF_VEHICLE_SPEED, access:0x1, changeMode:0x2, fs min:1.0, fs max:10.0
 Property:0x1140050e, Property name:HVAC_TEMPERATURE_DISPLAY_UNITS, access:0x3, changeMode:0x1, config:[49,48]
 ```
-**统计**：398 条属性，其中 **92 条可读写（access:0x3）**。
+**统计**：**178 条属性**，其中 **92 条可读写（access:0x3）**、75 只读、11 只写。存档文件 398 行 = 178 条 `Property:` 行 + 219 条 `\tareaId:` 子行 + 1 行标题；**数属性数用 `grep -c '^Property:'`，不是 `wc -l`**（本课最初的错误就出在这里）。
 
 **propId 位布局**（对照 `0x11400400`）：
 ```text
@@ -154,7 +154,8 @@ Result: Parcel(
 | P1b | 对 `GEAR_SELECTION` 调 `set-property-value` 报 `(code 4)` | `code 4 = ACCESS_DENIED`；**拒绝来自 VHAL**（属性被定义成只读 access:0x1） | 只读属性真车上也写不进（档位只能车产生）；要写就选 `access:0x3` 的属性 |
 | P2 | `service call car_service 1/2` 报 `Not a data message` / 花屏 | 事务码不是从 1 开始；ICar 的码是 11~19 | 查 AIDL 的 `= N`；先 `--help` 看有没有更友好的 `cmd` |
 | P3 | `service call car_service 16` 返回 `SecurityException: requires android.car.permission.CONTROL_CAR_...` | shell UID 没有该权限 | 换不需要权限的方法，或 `adb root` 后再试 |
-| P4 | `get-carpropertyconfig` 输出 398 行，找不到目标属性 | 全量太大 | `grep -iE "KEYWORD|access:0x3"` 过滤；或直接 `get-carpropertyconfig <propId>` |
+| P4 | `get-carpropertyconfig` 输出 398 行（178 条属性 + 219 条 areaId 子行），找不到目标属性 | 全量太大 | `grep -iE "KEYWORD|access:0x3"` 过滤；或直接 `get-carpropertyconfig <propId>` |
+| P5 | 把 398 当成属性数（`wc -l` 直接当计数） | 每个带 area 的属性会多一行 `\tareaId:` 子行，行数 ≠ 属性数 | 数属性用 `grep -c '^Property:'`（=178）；`wc -l` 只能说明存档多少行 |
 
 ## 面试高频命令
 

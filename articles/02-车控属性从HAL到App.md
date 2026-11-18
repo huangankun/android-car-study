@@ -26,7 +26,7 @@ flowchart LR
         CPM["CarPropertyManager<br/>持 ICarProperty 代理"]
         STUB["CarPropertyEventListenerToService<br/>反向 binder 桩"]
     end
-    subgraph CS["CarService 进程 (system)"]
+    subgraph CS["CarService 进程（平台服务）"]
         CPS["CarPropertyService<br/>ICarProperty.Stub 实现"]
         PHS["PropertyHalService<br/>ID 映射 + 类型转换"]
         VH["VehicleHal<br/>唯一持有 IVehicle 的地方"]
@@ -54,6 +54,8 @@ flowchart LR
 ---
 
 ## 二、机制
+
+> 文中所有源码片段都是**节选**：省掉了 null 检查、`Slogf` 日志、throws 子句和与本链路无关的分支，省略处用 `...` 或注释标出。逐行完整注释在仓库 `notes/w2d3/`、`notes/w2d4/`，对应源码存档在同目录 `src/`（Apache 2.0）。**别拿片段当逐字引用去对照 AOSP，行号对不上。**
 
 ### 2.1 读：四层里每层各干一件事
 
@@ -97,7 +99,7 @@ public CarPropertyValue getProperty(int prop, int zone) {
 }
 ```
 
-注意 `assertPermission` 检查的是**调用方（App）**，不是 CarService 自己。CarService 跑在 `system` uid 下，读什么都能读，正因为如此，权限判断必须显式做在它这里——这是 Android 权限模型的标准做法：**能力大的那一层负责守门**。
+注意 `assertPermission` 检查的是**调用方（App）**，不是 CarService 自己。CarService 是预装的平台服务，自己持有 `android.car.permission.*` 这一整套签名级权限，读什么都读得到——正因为它的能力远大于普通 App，权限断言必须显式做在这里，否则「服务能读」就等于「所有 App 都能读」。这是 Android 权限模型的标准做法：**能力大的那一层负责守门**。
 
 #### 第三层 · `PropertyHalService`：ID 映射 + 弱类型转强类型
 
@@ -123,47 +125,106 @@ public CarPropertyValue getProperty(int mgrPropId, int areaId) {
 }
 ```
 
-这里的映射表 `PROPERTY_ID_HAL_TO_MANAGER` 只有**一个条目**——`VEHICLE_SPEED_DISPLAY_UNITS`。其余 397 个属性，HAL 侧和 manager 侧的 propId 完全相同。
+这里的映射表 `PROPERTY_ID_HAL_TO_MANAGER` 只有**一个条目**——`VEHICLE_SPEED_DISPLAY_UNITS`。其余 177 个属性，HAL 侧和 manager 侧的 propId 完全相同。
 
-第一次看到会以为这是没写完，其实是：**映射表是特例表，查不到就用原值**（`getOrDefault(id, id)`）。用一个 `Map.of` 单条目来承担「同一概念在两套枚举里 id 不同」的历史包袱，比维护一张 398 行的全量表更难出错——全量表会过期，特例表不会。
+第一次看到会以为这是没写完，其实是：**映射表是特例表，查不到就用原值**（`getOrDefault(id, id)`）。用一个 `Map.of` 单条目来承担「同一概念在两套枚举里 id 不同」的历史包袱，比维护一张 178 行的全量表更难出错——全量表会过期，特例表不会。
 
 #### 第四层 · `VehicleHal`：唯一跨进程点
 
 ```java
-// packages/services/Car/service/src/com/android/car/hal/VehicleHal.java
+// packages/services/Car/service/src/com/android/car/hal/VehicleHal.java（节选，省了 throws 子句）
 public <T> T get(Class clazz, HalPropValue requestedPropValue) {
     HalPropValue propValue = mHalClient.getValue(requestedPropValue);   // ★ 过 binder 到 IVehicle
-    if (clazz == Float.class || clazz == float.class) {
-        return (T) propValue.getFloatValue(0);
+    if (clazz == Long.class || clazz == long.class) {
+        return (T) Long.valueOf(propValue.getInt64Value(0));
     } else if (clazz == Integer.class || clazz == int.class) {
-        return (T) propValue.getInt32Value(0);
+        return (T) Integer.valueOf(propValue.getInt32Value(0));
+    } else if (clazz == Boolean.class || clazz == boolean.class) {
+        return (T) Boolean.valueOf(propValue.getInt32Value(0) == 1);
+    } else if (clazz == Float.class || clazz == float.class) {
+        return (T) Float.valueOf(propValue.getFloatValue(0));
     } ...
 }
 ```
 
+`HalPropValue` 是弱类型结构——所有类型的值都存在 `int32[]` / `float[]` / `int64[]` 这几个数组里，所以上层要显式告诉它「我期望什么类型」，这段 if-else 就是按类型取字段。
+
 `mHalClient.getValue()` 是关键的一行，也是整个读路径上**唯一**的 binder 跳转。
 
-但它有个反常之处：`IVehicle` 的 `getValues()` 是**异步**的 AIDL（回调式，没有返回值），而 `HalClient.getValue()` 对外是同步返回的。中间发生了什么？`HalClient` 内部用 latch / 条件变量，把「发 `getValues` + 等 `onGetValues` 回调」包成了一次同步调用。
+但它有个反常之处：`IVehicle.getValues()` 是**异步**的 AIDL——签名是 `void getValues(IVehicleCallback callback, in GetValueRequests requests)`，没有返回值。而 `HalClient.getValue()` 对外是同步返回的。中间发生了什么？
 
-**为什么非要异步？** 因为 VHAL 下面挂着 CAN 总线。CAN 报文有往返延迟、可能丢帧、总线忙时排队，最坏情况是几十毫秒到上百毫秒。如果 `IVehicle.getValues()` 做成同步，每次读属性就会**占住一个 binder 线程**等总线——binder 线程池是有限的（默认 16 个），十几个 App 同时轮询就足以把 CarService 拖死。
+答案在 `AidlVehicleStub.get()`：**先登记一个 Future，异步发请求，再阻塞等这个 Future**。
 
-所以设计是：**底层异步（不占线程），上层用 latch 局部同步（调用方仍然拿到返回值）**。异步的责任被压在 `HalClient` 一个类里，上面四层一行都不用改。
+```java
+// service/src/com/android/car/AidlVehicleStub.java（android13-release，节选）
+public HalPropValue get(HalPropValue requestedPropValue)
+        throws RemoteException, ServiceSpecificException {
+    long requestId = mRequestId.getAndIncrement();
+
+    AndroidFuture<GetValueResult> resultFuture = new AndroidFuture();
+    synchronized (mLock) {
+        mPendingGetValueRequests.put(requestId, resultFuture);   // ① 先登记「等这个 requestId 的结果」
+    }
+
+    request.requestId = requestId;
+    GetValueRequests requests = new GetValueRequests();
+    requests.payloads = new GetValueRequest[]{request};          // ② 注意：一次只装一个属性
+    ...
+    mAidlVehicle.getValues(mGetSetValuesCallback, requests);     // ③ 异步发出去，立即返回
+
+    AndroidAsyncFuture<GetValueResult> asyncResultFuture = new AndroidAsyncFuture(resultFuture);
+    GetValueResult result = asyncResultFuture.get(mTimeoutMs, TimeUnit.MILLISECONDS);   // ④ 阻塞等回调
+    if (result.status != StatusCode.OK) {
+        throw new ServiceSpecificException(result.status, "failed to get value: " + request.prop);
+    }
+    return mPropValueBuilder.build(result.prop);
+}
+```
+
+回调到达时按 `requestId` 找到对应 Future 并给它赋值，第 ④ 行就放行了；超时（`mTimeoutMs`）会清掉 pending 记录、抛 `INTERNAL_ERROR`。
+
+外面还有一层 `HalClient.invokeRetriable`：VHAL 返回 `TRY_AGAIN` 时会重试，最长等 2000ms、每次间隔 50ms（`WAIT_CAP_FOR_RETRIABLE_RESULT_MS` / `SLEEP_BETWEEN_RETRIABLE_INVOKES_MS`）。这解释了初始化阶段为什么不容易读到空值——它会等你一会儿。
+
+**为什么要设计成异步？** 这一条 AOSP 注释写得很明确，不用猜。`IVehicle.aidl` 里 `getValues` 的注释：
+
+> The `IVehicleCallback#onGetValues` method will be called when values are fetched. **The method might be called multiple times, and each time with a subset of properties** that have been fetched. E.g., if you request properties [A, B, C], the callback might be called twice with [A, C] and with [B]. Caller should not expect any order.
+
+硬理由就是这一句：**一次请求可能拆成多次回调、每次只带一部分、顺序不定**。同步 API 只有一个返回值，语法上无法表达「分三批回来，第二批是 B」。所以 AIDL 只能做成回调式。
+
+注释里还带出三条语义，后面都用得上：
+
+- 可缓存（cachable）属性**直接返回缓存值，不碰真实总线**
+- 初始化阶段还没有数据时，`status` 返回 `TRY_AGAIN`
+- `STATIC` 属性永远返回同一个值
+
+那么「同步包装」为什么能成立？看第 ② 行：**`HalClient` 每次只请求一个 propId**——`payloads` 数组里就一个元素。请求里只有一个属性，「分批返回」在这次调用里不可能发生，一次回调必然带回全部结果，同步等待才有意义。
+
+**这是整条链路里最值得记住的一处折中**：AIDL 的异步能力是为批量请求、总线不确定性设计的；CarService 用「一次只问一个」把能力用窄了，换回同步语义供上面三层使用。代价是每次读属性都要一次完整往返，收益是上层不用写回调。
 
 ### 2.2 写：比读多两道坎
 
 写路径整体和读一样，但多了两道检查：
 
 ```java
+// CarPropertyService.java（节选，省了 throws 子句）
 public void setProperty(CarPropertyValue prop, ICarPropertyEventListener listener) {
     int propId = prop.getPropertyId();
     checkPropertyAccessibility(propId);          // ★ 坎 1：属性存在 + 有写权限字符串
+    // need an extra permission for writing display units properties.
     if (mHal.isDisplayUnitsProperty(propId)) {
-        CarServiceUtils.assertPermission(mContext, Car.PERMISSION_VENDOR_EXTENSION);
-        // ★ 坎 2：改「显示单位」这类属性，额外要 VENDOR_EXTENSION 权限
+        CarServiceUtils.assertPermission(mContext, Car.PERMISSION_VENDOR_EXTENSION);   // ★ 坎 2
     }
     mHal.setProperty(prop);
-    updateSetOperationRecorderLocked(propId, prop.getAreaId(), client);
-    // 记住「谁设的」，用于事后 set 失败时的异步回调
+    IBinder listenerBinder = listener.asBinder();
+    synchronized (mLock) {
+        Client client = mClientMap.get(listenerBinder);   // 按反向 binder 找已有 Client
+        if (client == null) { client = new Client(listener); }
+        if (client.isDead()) {
+            Slogf.w(TAG, "the ICarPropertyEventListener is already dead");
+            return;
+        }
+        updateSetOperationRecorderLocked(propId, prop.getAreaId(), client);   // 记住「谁设的」
+    }
 }
 ```
 
@@ -202,36 +263,49 @@ sequenceDiagram
 `VehicleHal.onPropertyEvent` 本身不做任何业务判断，只做路由：
 
 ```java
+// VehicleHal.java（节选，省了 Slogf.e 的参数）
 @Override
 public void onPropertyEvent(ArrayList<HalPropValue> propValues) {
     synchronized (mLock) {
-        for (HalPropValue v : propValues) {
+        for (int i = 0; i < propValues.size(); i++) {
+            HalPropValue v = propValues.get(i);
             int propId = v.getPropId();
             HalServiceBase service = mPropertyHandlers.get(propId);   // 谁负责这个属性
-            if (service == null) { continue; }                        // 没人认领就丢
+            if (service == null) {
+                Slogf.e(CarLog.TAG_HAL, "HalService not found for prop: ...");
+                continue;                                             // 没人认领就丢
+            }
             service.getDispatchList().add(v);
             mServicesToDispatch.add(service);
+            VehiclePropertyEventInfo info = mEventLog.get(propId);    // 顺便记事件统计
+            if (info == null) { mEventLog.put(propId, new VehiclePropertyEventInfo(v)); }
+            else { info.addNewEvent(v); }
         }
     }
     for (HalServiceBase s : mServicesToDispatch) {
         s.onHalEvents(s.getDispatchList());
         s.getDispatchList().clear();
     }
+    mServicesToDispatch.clear();      // ← 别漏：这个 List 是复用字段，不清会越攒越多
 }
 ```
 
 `mPropertyHandlers` 是 `SparseArray<HalServiceBase>`：**每个 propId 只归属一个 HAL service**。绝大多数属性归 `PropertyHalService`，电源/输入/用户/仪表等少数归专门的服务。这个归属关系在 `init()` 里一次建好：先 `getAllPropConfigs()` 把 VHAL 的属性配置全拉下来，再逐个问每个 service「这个属性归你吗」。
 
-构造时还有个细节：`mPropertyHal` 必须排在服务列表**最后**。
+构造时还有个细节：`mPropertyHal` 必须排在服务列表**最后**。源码注释就写在下面两行：
 
 ```java
 mAllServices = List.of(
         mPowerHal, mInputHal, mDiagnosticHal, mVmsHal,
         mUserHal, mClusterHalService, mEvsHal, mTimeHalService,
-        mPropertyHal);        // ← 注释原文：mPropertyHal must be the last
+        mPropertyHal);
+// mPropertyHal must be the last so that on init/release
+// it can be used for all other HAL services properties.
 ```
 
-原因是其他 HAL service 在初始化时自己要读属性（比如电源服务要知道当前状态），得等属性层先就绪。**一个 List 的排序承担了隐式的初始化依赖**——这种设计在 AOSP 里很常见，也很容易踩。
+注释的意思是：init/release 期间，**其他 HAL service 要拿它来读写属性**。再往下看就会发现 `release()` 是**逆序**释放的（源码注释：`release in reverse order from init`），所以这个「最后」在两个方向上的含义并不对称。
+
+注释没展开为什么必须如此，我不替它补理由。真正该记住的是一个朴素事实：**一个 `List.of` 的元素顺序承担了隐式的初始化/释放依赖**——改顺序就改行为，编译器不报、单测不炸。
 
 事件到 `CarPropertyService` 后，最后一跳是分发：
 
@@ -261,7 +335,7 @@ public void onPropertyChange(List<CarPropertyEvent> events) {
 
 1. **锁内只分组、锁外才回调**。App 的 `onEvent` 里如果又调 CarService（很常见，比如收到车速变化后立刻读一次档位），锁内回调立刻死锁。
 2. **按 Client 分组，不广播**。每个 App 只收自己订阅的属性，`mPropIdClientMap` 是 `propId → 订阅者列表`。
-3. **`client.onEvent` 是 oneway**。发出去就算完成，App 卡住不会拖累 CarService。
+3. **`client.onEvent` 是 oneway**。`ICarPropertyEventListener` 在 AIDL 里就声明成 `oneway interface`，发出去就算完成，App 卡住不会拖累 CarService——顺带这也是路 B/路 C 都必然是异步的原因。
 
 反向的那一端在 App 侧，就是为它准备的一个桩：
 
@@ -321,7 +395,7 @@ private <T> T handleCarServiceSpecificException(ServiceSpecificException e, int 
 
 口诀：**当场拒是同步抛，事后败是回调报，值变化是主动推。**
 
-最容易错的是把 A 当成「异步回调回来」。不是——`HalClient.setValue` 用 latch 把异步 `setValues` 包成了同步，VHAL 拒了当场就冒泡到你 `setProperty` 的 catch 里，**根本不走 event 通道**。而 B（`onPropertySetError`）专用「写成功了但执行失败」，这才是 `setProperty` 为什么要传反向 binder 的原因。
+最容易错的是把 A 当成「异步回调回来」。不是——`AidlVehicleStub.set()` 和 `get()` 同一套写法（登记 Future → 异步发 `setValues` → `future.get(timeout)` 阻塞等），VHAL 拒了当场就冒泡到你 `setProperty` 的 catch 里，**根本不走 event 通道**。而 B（`onPropertySetError`）专用「写成功了但执行失败」，这才是 `setProperty` 为什么要把反向 binder 一起传下去的原因。
 
 ---
 
@@ -335,12 +409,14 @@ private <T> T handleCarServiceSpecificException(ServiceSpecificException e, int 
 
 ```bash
 $ adb shell cmd car_service get-carpropertyconfig | grep -iE "SPEED|GEAR|TEMP"
-Property:0x11600207, Property name:PERF_VEHICLE_SPEED, access:0x1, changeMode:0x2, fs min:1.0, fs max:10.0
-Property:0x11400400, Property name:GEAR_SELECTION, access:0x1, changeMode:0x1, config:[4,1,2,8,16,32,64,128,256]
-Property:0x1140050e, Property name:HVAC_TEMPERATURE_DISPLAY_UNITS, access:0x3, changeMode:0x1, config:[49,48]
+Property:0x11600207, Property name:PERF_VEHICLE_SPEED, access:0x1, changeMode:0x2, config:[], fs min:1.000000, fs max:10.000000
+Property:0x11400400, Property name:GEAR_SELECTION, access:0x1, changeMode:0x1, config:[4, 1, 2, 8, 16, 32, 64, 128, 256], fs min:0.000000, fs max:0.000000
+Property:0x1140050e, Property name:HVAC_TEMPERATURE_DISPLAY_UNITS, access:0x3, changeMode:0x1, config:[49, 48], fs min:0.000000, fs max:0.000000
 ```
 
-这台模拟器上共 **398 条属性**，其中 **92 条可读写（`access:0x3`）**。三个字段决定了一个属性能不能写、能不能订阅：
+（存档 `experiments/w2d2/property-configs.txt` 共 398 行 = 178 条属性行 + 219 条 `\tareaId:` 子行 + 1 行标题。**行数不是属性数**，别被 `wc -l` 骗——这是我在 W2D2 真栽过的坑。）
+
+这台模拟器上共 **178 条属性**，其中 **92 条可读写（`access:0x3`）**。三个字段决定了一个属性能不能写、能不能订阅：
 
 - `access`：`0x1` 只读、`0x2` 只写、`0x3` 读写
 - `changeMode`：`0x1` ON_CHANGE（变了才报）、`0x2` CONTINUOUS（按 rate 持续推）
@@ -358,7 +434,7 @@ floatValues: [0.0], int32Values: [], int64Values: [], bytes: [], string:
 
 ### 3.3 写：完整闭环
 
-选一个全局可读写属性，`HVAC_TEMPERATURE_DISPLAY_UNITS`（0x1140050e，48=华氏 / 49=摄氏）：
+选一个全局可读写属性，`HVAC_TEMPERATURE_DISPLAY_UNITS`（0x1140050e，`VehicleUnit.CELSIUS=0x30=48`、`FAHRENHEIT=0x31=49`）：
 
 ```bash
 $ adb shell cmd car_service set-property-value 0x1140050e 0 48
@@ -469,7 +545,7 @@ public void injectVhalEvent(int property, int zone, String value, int delayTime)
 
 > App 读一个车控属性跨三个进程：App → CarService 走 `ICarProperty`，CarService → VHAL 走 `IVehicle`，两个都是 binder。真正跨到厂商进程的只有 `VehicleHal` 里 `HalClient.getValue/setValue` 那一处。
 >
-> VHAL 的 `IVehicle` 是异步 AIDL，因为底下是 CAN 总线，同步会占住 binder 线程；`HalClient` 用 latch 把它包成同步，异步细节压在那一层。
+> VHAL 的 `IVehicle` 是异步 AIDL：AIDL 注释明说一次 `getValues` 可能被拆成多次回调、每次带一部分属性、顺序不定，同步返回值表达不了这种语义。`AidlVehicleStub` 用 `AndroidFuture` + 超时等待把它包成同步，前提是每次只请求一个属性。
 >
 > 权限分三段：服务层的权限字符串、HAL 层的支持列表、VHAL 的 access 位。所以会出现「服务层放行、被 VHAL 拒」——这时 App 拿到的是 `code 4`，翻译成 `PropertyAccessDeniedSecurityException`。
 >

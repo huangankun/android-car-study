@@ -6,7 +6,7 @@
 |---|---|
 | [w1d5-first-modification/](./w1d5-first-modification/) | 第一次改 Shizuku 代码：patch + logcat 标记 + 构建信息 |
 | [w2d1-aaos/](./w2d1-aaos/) | AAOS 镜像试跑：dumpsys car_service + 33 服务清单 + 构建信息 + 截图 |
-| [w2d2/](./w2d2/) | 属性读写实验：398 条属性配置 + service call 原始输出 + VHAL 注入测试 |
+| [w2d2/](./w2d2/) | 属性读写实验：178 条属性配置（`property-configs.txt` 共 398 行，含 219 条 `areaId` 子行）+ service call 原始输出 + VHAL 注入测试 |
 | [w2d5/](./w2d5/) | logcat 追踪：CarShellCommand 入口 + CarPropertyService 计数器 + 注入时间戳对比 |
 
 约定：

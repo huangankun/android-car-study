@@ -34,7 +34,7 @@ adb shell cmd car_service get-property-value 0x11600207
 Property:0x11600207, status: 0, timestamp: 26000546095, zone: 0x0,
 floatValues: [0.0], int32Values: [], int64Values: [], bytes: [], string:
 ```
-**logcat 段**：`mSyncGetSetPropertyOpCount` 没有波动——读操作在 CarPropertyService 内走的是同步返回路径，不经过计数。
+**logcat 段**：`mSyncGetSetPropertyOpCount` 同样 `1 → 0`——`get` 也是同步操作，也走 `runSyncOperationCheckLimit` 计数（2026-11-18 真机复验确认）。
 
 ### S3 · 操作 ②：写 HVAC_TEMPERATURE_DISPLAY_UNITS 48→49 ✅
 ```bash
@@ -54,7 +54,7 @@ adb shell cmd car_service set-property-value 0x1140050e 0 49  # 恢复
 **解读**：
 - `CarShellCommand` 在 INFO 级记录**每一次 cmd car_service 操作**——它是统一入口，所有 `cmd car_service` 命令都从这里进。
 - `mSyncGetSetPropertyOpCount` 从 0→1→0，说明 CarPropertyService **确实收到了 set 请求**并处理了。
-- 两次 set 之间有 get（读回），但 get 没触发计数器——因为 `getProperty` 走的是同步返回路径（不经 mSyncGetSetPropertyOpCount），而 `setProperty` 需要等 VHAL 回复，有"待处理计数"。
+- **修正**：`get` 和 `set` 都经过 `runSyncOperationCheckLimit`，都会让计数器 +1/-1。它是**并发同步 get/set 上限保护**（并发数 ≥ `SYNC_GET_SET_PROPERTY_OP_LIMIT` 时抛 `SYNC_OP_LIMIT_TRY_AGAIN`），不是「set 等、get 不等」。原文错误，2026-11-18 真机复验后已改。
 
 ### S4 · 操作 ③：inject-vhal-event 车速=22.5 ✅
 ```bash
@@ -85,7 +85,7 @@ Property:0x11600207, timestamp: 26000546095, floatValues: [0.0]
 | # | 现象 | 原因 | 结论 |
 |---|---|---|---|
 | P1 | `setprop log.tag.VehicleHal VERBOSE` 无效 | VehicleHal 的日志由 `DBG` 编译期常量控制，不是运行时 log tag | 要 DEBUG 日志只能改源码重编，或 Android Studio 断点 |
-| P2 | `get-property-value` 没有 CarPropertyService 日志 | 读操作走同步返回路径，不触发 `mSyncGetSetPropertyOpCount` 计数；只有 `setProperty` 会触发 | 这是正常的：读是"一问一答"，写是"下发后等回复"，计数只跟踪后者 |
+| P2（已推翻） | 原以为 `get-property-value` 不触发 `mSyncGetSetPropertyOpCount` | **错**。android14-release 源码 + 真机复验：`getProperty` 也走 `runSyncOperationCheckLimit`，同样 +1/-1 | 计数器是**并发同步 get/set 限流**（超 `SYNC_GET_SET_PROPERTY_OP_LIMIT` 抛 `SYNC_OP_LIMIT_TRY_AGAIN`），不是「set 才计数」 |
 
 ## 面试高频
 
@@ -98,7 +98,7 @@ adb logcat | grep "CarShellCommand"
 
 ## 自测（3 题，做完喊我）
 
-1. `mSyncGetSetPropertyOpCount` 在 `setProperty` 时从 0→1→0，但在 `getProperty` 时不动。为什么？（提示：读 vs 写的"异步性"差别）
+1. `mSyncGetSetPropertyOpCount` 是什么？它包住了哪些操作？并发超过上限会发生什么？
 2. `inject-vhal-event` 的 logcat 有记录，但 `get-property-value` 时间戳不变——这证明了什么？用 W2D2/W2D3 的源码解释。
 3. 如果你面试时被问「你怎么验证一个属性读写请求确实到达了 VHAL」，除了 `cmd car_service`，还有什么手段？
 

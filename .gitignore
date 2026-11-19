@@ -9,3 +9,8 @@ traces/*.pftrace
 # experiments 里的构建产物（保留源码与日志，产物可重建）
 experiments/**/build/
 experiments/**/out/
+
+# 视频/推广物料与发布定稿是单独的私有仓库（~/projects/android-car-video/、~/projects/android-car-articles/），不进公开学习仓库
+video/
+shizuku-video/
+articles/

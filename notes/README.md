@@ -17,7 +17,7 @@
 | W2D5 | [logcat 追踪](./w2d5-logcat追踪-stepper.md) |
 | W2D7 | [两周检查点复盘](./w2d7-两周检查点复盘.md) |
 
-> W1D6（文章底稿）在 [articles/](../articles/)。
+> W1D6、W2D6 等对外发布文章定稿独立存放在私有成稿仓库，发布后在根 [`README.md`](../README.md)「文章索引」回填公开链接。
 
 ## 子目录
 - [dumpsys/](./dumpsys/) — 10 条系统服务 dump 讲解版

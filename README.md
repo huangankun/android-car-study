@@ -29,10 +29,6 @@
 <!-- TREE:START -->
 ```
 ./
-├── articles/
-│   ├── 01-shizuku源码解读.md
-│   ├── 02-车控属性从HAL到App.md
-│   └── README.md
 ├── experiments/
 │   ├── w1d5-first-modification/
 │   │   ├── build-info.txt
@@ -144,10 +140,12 @@
 
 ## 文章索引
 
-| # | 标题 | 状态 |
-|---|---|---|
-| 01 | [Shizuku 源码解读：不用 Root，如何让 App 调用系统级 API？](./articles/01-shizuku源码解读.md) | v1 定稿（底稿） |
-| 02 | [一个车控属性从 HAL 到 App 的旅程](./articles/02-车控属性从HAL到App.md) | v1 待过结构 |
+> 为保护多平台首发权重，文章成稿独立存放在私有仓库维护；对外发布后在此回填公开阅读链接。
+
+| # | 标题 | 状态 | 公开链接 |
+|---|---|---|---|
+| 01 | Shizuku 源码解读：不用 Root，如何让 App 调用系统级 API？ | 定稿待发 | 待回填 |
+| 02 | 一个车控属性从 HAL 到 App 的旅程 | 定稿待发 | 待回填 |
 
 ## 环境要求
 

@@ -15,6 +15,7 @@
 | W2D3 | [黄金链路精读](./w2d3-黄金链路导读-stepper.md) + [逐行注释](./w2d3/) |
 | W2D4 | [App 侧精读](./w2d4-黄金链路App侧-stepper.md) + [逐行注释](./w2d4/) + [三层异步辨析](./w2d4-三层异步辨析.md) |
 | W2D5 | [logcat 追踪](./w2d5-logcat追踪-stepper.md) |
+| W2D7 | [两周检查点复盘](./w2d7-两周检查点复盘.md) |
 
 > W1D6（文章底稿）在 [articles/](../articles/)。
 

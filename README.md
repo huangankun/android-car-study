@@ -111,7 +111,8 @@
 │   ├── w2d3-黄金链路导读-stepper.md
 │   ├── w2d4-三层异步辨析.md
 │   ├── w2d4-黄金链路App侧-stepper.md
-│   └── w2d5-logcat追踪-stepper.md
+│   ├── w2d5-logcat追踪-stepper.md
+│   └── w2d7-两周检查点复盘.md
 ├── scripts/
 │   ├── README.md
 │   └── check_readme.py
@@ -166,6 +167,7 @@
 - 2026-11-13：W2D4 精读 CarPropertyManager → 示例 App（双向 binder + 错误码翻译）+ 概念辨析（Stub/强弱类型）
 - 2026-11-16：W2D4 复习（三层异步辨析）+ W2D5 logcat 追踪 + README 全量校验脚本 check_readme.py
 - 2026-11-18：W2D5 修正（`get` 也触发 `mSyncGetSetPropertyOpCount`——真机复验 + android14-release 源码；原文误称 get 不触发）
+- 2026-11-19：W2D7 两周检查点复盘（补做）+ 排期口径改为「按阶段目标、不锁报到日」；CarLauncher 整条线降级
 
 ## License
 
